@@ -1,0 +1,18 @@
+[package]
+name = "halcyon"
+version = "0.1.0"
+
+[lib]
+name = "halcyon"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mat3_rot"
+path = "examples/mat3_rot.rs"
+
+[dependencies]
+nalgebra = "*"
+
+[dependencies.kiss3d]
+# For the samples only: (maybe move to subproject?)
+git = "https://github.com/Ticki/kiss3d"
