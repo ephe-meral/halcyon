@@ -16,7 +16,7 @@ fn main() {
 
     let rot = rot(0.3, 0.3, 0.3);
     let base3 = base!(3);
-    let base3_rot = mul_mat_mat(rot, base3);
+    let base3_rot = mul!(rot: [[_; 3]; 3], base3: [[_; 3]; 3]);
 
     while window.render() {
         for v in base3.into_iter() {
