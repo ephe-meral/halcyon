@@ -22,7 +22,7 @@ macro_rules! base {
 }
 
 /// Statically generates a multiplication of two arbitrarily sized matrices.
-/// The first matrix' x dimension needs to be the same as the second's y dimension.
+/// The first matrix' m dimension needs to be the same as the second's n dimension.
 #[macro_export]
 macro_rules! mul {
     ($mat_a:ident: [[_; $dim_k1:expr]; $dim_i:expr], $mat_b:ident: [[_; $dim_j:expr]; $dim_k2:expr]) => {{
