@@ -1,4 +1,4 @@
-extern crate halcyon;
+#[macro_use] extern crate halcyon;
 extern crate kiss3d;
 extern crate nalgebra;
 
@@ -15,20 +15,21 @@ fn main() {
     //cube.set_color(1.0, 0.0, 0.0);
 
     let rot = rot(0.3, 0.3, 0.3);
+    let base3 = base!(3);
+    let base3_rot = mul_mat_mat(rot, base3);
 
     while window.render() {
-        draw_line(&mut window, [0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]);
-        draw_line(&mut window, [0.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]);
-        draw_line(&mut window, [0.0, 0.0, 0.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0]);
+        for v in base3.into_iter() {
+            draw_line(&mut window, [0.0, 0.0, 0.0], v, [0.0, 0.0, 1.0]);
+        }
 
-        // TODO cleanup
-        draw_line(&mut window, [0.0, 0.0, 0.0], mul_mat_vec(rot, [1.0, 0.0, 0.0]), [1.0, 0.0, 0.0]);
-        draw_line(&mut window, [0.0, 0.0, 0.0], mul_mat_vec(rot, [0.0, 1.0, 0.0]), [1.0, 0.0, 0.0]);
-        draw_line(&mut window, [0.0, 0.0, 0.0], mul_mat_vec(rot, [0.0, 0.0, 1.0]), [1.0, 0.0, 0.0]);
+        for v in base3_rot.into_iter() {
+            draw_line(&mut window, [0.0, 0.0, 0.0], v, [1.0, 0.0, 0.0]);
+        }
     }
 }
 
-fn draw_line(window: &mut Window, from: [f32; 3], to: [f32; 3], color: [f32; 3]) {
+fn draw_line(window: &mut Window, from: [f32; 3], to: &[f32; 3], color: [f32; 3]) {
     window.draw_line(
         &Pnt3::new(from[0], from[1], from[2]),
         &Pnt3::new(to[0], to[1], to[2]),

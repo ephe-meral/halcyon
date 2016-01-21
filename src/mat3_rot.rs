@@ -1,4 +1,7 @@
-// new rotation matrix for rotation around e3 and then around e1 base vectors.
+/// Creates a 3D rotation matrix.
+/// Rotates counterclockwise around axis e3, e2' and finally e1''
+/// We calculate a roation matrix for each and multiply them
+/// in the end in that order.
 pub fn rot(agl1: f32, agl2: f32, agl3: f32) -> [[f32; 3]; 3] {
     let mat3_a = 
         [[ agl1.cos(), agl1.sin(), 0.0],
@@ -18,7 +21,7 @@ pub fn rot(agl1: f32, agl2: f32, agl3: f32) -> [[f32; 3]; 3] {
     return mul_mat_mat(mul_mat_mat(mat3_a, mat3_b), mat3_c);
 }
 
-fn mul_mat_mat(mat3_a: [[f32; 3]; 3], mat3_b: [[f32; 3]; 3]) -> [[f32; 3]; 3] {
+pub fn mul_mat_mat(mat3_a: [[f32; 3]; 3], mat3_b: [[f32; 3]; 3]) -> [[f32; 3]; 3] {
     let mut res = [[0.0; 3]; 3];
     for i in 0..3 { for j in 0..3 { for k in 0..3 {
         res[i][j] += mat3_a[i][k] * mat3_b[k][j];
