@@ -19,6 +19,6 @@ pub fn rot(agl1: f32, agl2: f32, agl3: f32) -> [[f32; 3]; 3] {
          [0.0,  agl3.cos(), agl3.sin()],
          [0.0, -agl3.sin(), agl3.cos()]];
 
-    let step1 = mul!(mat3_a: [[_; 3]; 3], mat3_b: [[_; 3]; 3]);
-    mul!(step1: [[_; 3]; 3], mat3_c: [[_; 3]; 3])
+    let step1 = mul!(mat3_a: [3, 3], mat3_b: [3, 3]);
+    mul!(step1: [3, 3], mat3_c: [3, 3])
 }
